@@ -23,22 +23,26 @@ export class CryptoService {
 
   public async encrypt(message: string, ownerKey: openpgp.key.Key, sharedKeys: openpgp.key.Key[]): Promise<{
     encryptedMessage: string,
-    encryptedMasterKey: openpgp.message.Message,
+    encryptedMasterKey: openpgp.message.Message | any,
   }> {
     const fileHash = CryptoJS.SHA3(message).toString();
     const masterKey = this.generateSecret();
 
-    const encryptedMessage = CryptoJS.AES.encrypt(message, masterKey).toString();
+    const encryptedMessage = CryptoJS.AES.encrypt(message, masterKey);
+    console.log(encryptedMessage);
 
-    const encryptedMasterKey = await openpgp.encrypt({
-      message: openpgp.message.fromText(masterKey),
-      passwords: [fileHash],                 // accessible to anyone that knows the hash of the contents
-      publicKeys: [ownerKey, ...sharedKeys], // and to anyone whose publickey was used to encrypt
-      privateKeys: [ownerKey],               // to verify this file was uploaded by us.
-      armor: false,
-    });
+    return {encryptedMessage: 'asd', encryptedMasterKey: null };
 
-    return {encryptedMessage, encryptedMasterKey: encryptedMasterKey.message}
+
+    // const encryptedMasterKey = await openpgp.encrypt({
+    //   message: openpgp.message.fromText(masterKey),
+    //   passwords: [fileHash],                 // accessible to anyone that knows the hash of the contents
+    //   publicKeys: [ownerKey, ...sharedKeys], // and to anyone whose publickey was used to encrypt
+    //   privateKeys: [ownerKey],               // to verify this file was uploaded by us.
+    //   armor: false,
+    // });
+
+    // return {encryptedMessage, encryptedMasterKey: encryptedMasterKey.message}
   }
 
   public async generatePgpKeys(name: string, email: string, passphrase: string): Promise<openpgp.key.Key> {

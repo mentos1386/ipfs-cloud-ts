@@ -1,23 +1,23 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
 
-  <button mat-raised-button color="primary" (click)="generatePgpKey()">Generate PGP Keys</button>
+  <div class="column-container">
 
-  <div class="card-container">
-    <mat-card>
-      <mat-card-header>Private Key</mat-card-header>
-      <mat-card-content>
-        <pre>{{privateKey}}</pre>
-      </mat-card-content>
-    </mat-card>
+    <div class="row-container action-buttons">
+      <button mat-raised-button color="primary" (click)="generatePgpKey()">Generate PGP Keys</button>
+      <button mat-raised-button color="primary" (click)="encryptMessage()">Encrypt Message</button>
+    </div>
 
-    <div class="seperator"></div>
+    <div class="row-container">
+      <mat-form-field>
+        <textarea matInput [formControl]="message" [disabled]="!pgpKey" placeholder="Message"></textarea>
+      </mat-form-field>
 
-    <mat-card>
-      <mat-card-header>Public Key</mat-card-header>
-      <mat-card-content>
-        <pre>{{publicKey}}</pre>
-      </mat-card-content>
-    </mat-card>
+      <pre>{{encryptedMessage}}</pre>
+    </div>
+
+    <div class="row-container" *ngIf="pgpKey">
+      <pre>{{pgpKey.armor()}}</pre>
+      <pre>{{pgpKey.toPublic().armor()}}</pre>
   </div>
 </div>

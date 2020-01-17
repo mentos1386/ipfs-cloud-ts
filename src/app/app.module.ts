@@ -12,6 +12,9 @@ import { CryptoService } from './crypto.service';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { LayoutModule } from '@angular/cdk/layout';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatGridListModule,
     MatIconModule,
     LayoutModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   providers: [CryptoService],
   bootstrap: [AppComponent]
