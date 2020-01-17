@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CryptoService } from './crypto.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ipfs-cloud';
+
+  privateKey: string;
+  publicKey: string;
+
+
+  constructor(private cryptoService: CryptoService) {
+  }
+
+  async generatePgpKey() {
+    const key = await this.cryptoService.generatePgpKeys('test', 'test@test.com', 'test');
+    this.privateKey = key.armor();
+    this.publicKey = key.toPublic().armor();
+  }
 }
