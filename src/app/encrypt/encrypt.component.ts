@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { FormControl } from '@angular/forms';
+import { CryptoService } from '../crypto.service';
 
 @Component({
   selector: 'app-encrypt',
@@ -8,26 +8,19 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./encrypt.component.scss']
 })
 export class EncryptComponent {
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
-      }
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
-  );
+  encryptedMessage: string;
+  encyrptedMasterKey: string;
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  message = new FormControl('');
+
+  constructor(private cryptoService: CryptoService) {
+  }
+
+  async encryptMessage() {
+    const message = await this.cryptoService.encrypt(this.message.value, this.pgpKey, []);
+    this.encryptedMessage = message.encryptedMessage;
+    console.log(message.encryptedMasterKey);
+    this.encyrptedMasterKey = message.encryptedMasterKey;
+  }
 }

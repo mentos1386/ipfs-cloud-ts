@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CryptoService } from '../crypto.service';
 import * as openpgp from 'openpgp';
+import { Store, State } from '@ngrx/store';
 
 @Component({
   selector: 'app-pgp',
@@ -9,7 +10,7 @@ import * as openpgp from 'openpgp';
 })
 export class PgpComponent {
 
-  constructor(private cryptoService: CryptoService) {
+  constructor(private cryptoService: CryptoService, private store: Store<State>) {
   }
 
   pgpKey: openpgp.key.Key;
