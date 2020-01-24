@@ -2,30 +2,6 @@
     margin: 1em;
 }
 
-.action-buttons button {
-    margin-bottom: 1em;
-}
-
-.column-container {
-    display: flex;
-    flex-direction: column;
-    > * {
-        flex: 1 1 auto;
-    }
-
-    > *:not(:first-child) {
-        margin-left: 1em;
-    }
-}
-
-.row-container {
-    display: flex;
-    flex-direction: row;
-    > * {
-        flex: 1 1 auto;
-    }
-
-    > *:not(:first-child) {
-        margin-left: 1em;
-    }
+#header {
+    justify-content: space-between;
 }

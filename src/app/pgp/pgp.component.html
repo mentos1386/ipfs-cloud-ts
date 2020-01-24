@@ -1,0 +1,16 @@
+<div class="grid-container">
+  <h1 class="mat-h1">PGP</h1>
+ 
+  <button mat-raised-button color="primary" (click)="generatePgpKey()">Generate PGP Keys</button>
+
+  <div class="keys" *ngIf="pgpKey">
+    <div>
+      <h5>Private</h5>
+      <pre>{{pgpKey.armor()}}</pre>
+    </div>
+    <div>
+      <h5>Public</h5>
+      <pre>{{pgpKey.toPublic().armor()}}</pre>
+    </div>
+  </div>
+</div>

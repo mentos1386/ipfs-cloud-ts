@@ -1,24 +1,14 @@
+<mat-toolbar id="header" color="primary">
+  <span>IPFS Cloud</span>
+
+  <nav>
+    <a mat-button routerLink="/" routerLinkActive="">Home</a>
+    <a mat-button routerLink="/encrypt" routerLinkActive="mat-accent">Encrypt</a>
+    <a mat-button routerLink="/decrypt" routerLinkActive="mat-accent">Decrypt</a>
+    <a mat-button routerLink="/pgp" routerLinkActive="mat-accent">PGP</a>
+  </nav>
+</mat-toolbar>
+
 <div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-
-  <div class="column-container">
-
-    <div class="row-container action-buttons">
-      <button mat-raised-button color="primary" (click)="generatePgpKey()">Generate PGP Keys</button>
-      <button mat-raised-button color="primary" (click)="encryptMessage()">Encrypt Message</button>
-    </div>
-
-    <div class="row-container">
-      <mat-form-field>
-        <textarea matInput [formControl]="message" [disabled]="!pgpKey" placeholder="Message"></textarea>
-      </mat-form-field>
-
-      <pre>{{encryptedMessage}}</pre>
-      <pre>{{encyrptedMasterKey}}</pre>
-    </div>
-
-    <div class="row-container" *ngIf="pgpKey">
-      <pre>{{pgpKey.armor()}}</pre>
-      <pre>{{pgpKey.toPublic().armor()}}</pre>
-  </div>
+  <router-outlet></router-outlet>
 </div>

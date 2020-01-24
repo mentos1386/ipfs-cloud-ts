@@ -15,10 +15,19 @@ import { LayoutModule } from '@angular/cdk/layout';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EncryptComponent } from './encrypt/encrypt.component';
+import { DecryptComponent } from './decrypt/decrypt.component';
+import { PgpComponent } from './pgp/pgp.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
 
 @NgModule({
   declarations: [
     AppComponent,
+    EncryptComponent,
+    DecryptComponent,
+    PgpComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +42,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatToolbarModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    }),
   ],
   providers: [CryptoService],
   bootstrap: [AppComponent]
