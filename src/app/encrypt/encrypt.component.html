@@ -4,12 +4,12 @@
   <button mat-raised-button color="primary" (click)="encryptMessage()">Encrypt Message</button>
 
   <mat-form-field>
-    <textarea matInput [formControl]="message" [disabled]="!pgpKey" placeholder="Message"></textarea>
+    <textarea matInput [formControl]="message" placeholder="Message"></textarea>
   </mat-form-field>
 
   <div class="messages">
     <div>
-      <h5>Encrypted Message AES-GCM</h5>
+      <h5>Encrypted Message (AES-GCM)</h5>
       <pre>{{encryptedMessage}}</pre>
     </div>
     <div>
